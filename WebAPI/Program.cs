@@ -1,4 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using WebAPI;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<TeacherDbContext>(option =>
+{
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    option.UseMySQL(connectionString);
+});
 
 // Add services to the container.
 builder.Services.AddControllers(option => option.ReturnHttpNotAcceptable = true)
