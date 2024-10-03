@@ -4,12 +4,13 @@ using WebAPI.Model;
 namespace WebAPI;
 
 public class TeacherDbContext : DbContext {
-    public DbSet<Teacher> T { get; set; }
+    public DbSet<Teacher> Teacher { get; set; }
     public DbSet<Student> Students { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<Subject> Subjects { get; set; }
     public DbSet<University> Universities { get; set; }
     public DbSet<SubjectEnrolment> Enrolments { get; set; }
+    public DbSet<Address> Addresses { get; set; }
 
     public TeacherDbContext(DbContextOptions<TeacherDbContext> options) :
         base(options) {
