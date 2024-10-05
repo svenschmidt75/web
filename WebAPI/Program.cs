@@ -9,7 +9,10 @@ builder.Services.AddDbContext<TeacherDbContext>(option => {
 });
 
 // Add services to the container.
-builder.Services.AddControllers(option => option.ReturnHttpNotAcceptable = true)
+builder.Services.AddControllers(option => {
+        // SS: if the content type doesn't match, return 406, not acceptable
+        option.ReturnHttpNotAcceptable = true;
+    })
     .AddNewtonsoftJson()
     .AddXmlDataContractSerializerFormatters();
 builder.Services.AddEndpointsApiExplorer();
