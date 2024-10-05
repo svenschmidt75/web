@@ -14,6 +14,8 @@ builder.Services.AddControllers(option => option.ReturnHttpNotAcceptable = true)
     .AddXmlDataContractSerializerFormatters();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(typeof(MappingConfig));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
