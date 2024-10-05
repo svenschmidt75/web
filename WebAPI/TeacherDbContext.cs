@@ -26,6 +26,7 @@ public class TeacherDbContext : DbContext {
         // SS: seed Address table with data
         modelBuilder.Entity<Address>().HasData(
             new Address {
+                Id = 1,
                 City = "London",
                 Code = "OX14 1DX",
                 Country = "United States",
