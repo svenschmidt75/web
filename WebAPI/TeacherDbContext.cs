@@ -22,5 +22,18 @@ public class TeacherDbContext : DbContext {
         modelBuilder
             .Entity<SubjectEnrolment>(
                 eb => { eb.HasNoKey(); });
+
+        // SS: seed Address table with data
+        modelBuilder.Entity<Address>().HasData(
+            new Address {
+                City = "London",
+                Code = "OX14 1DX",
+                Country = "United States",
+                State = "Colorado",
+                Suburb = "Boulder County",
+                StreetName = "Central Street",
+                StreetNumber = 2366,
+                UnitNumber = 12,
+            });
     }
 }
