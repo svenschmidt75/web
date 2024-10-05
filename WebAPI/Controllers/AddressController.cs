@@ -13,7 +13,7 @@ public class AddressController : ControllerBase {
     }
 
     [HttpGet]
-    public IEnumerable<AddressDTO> GetAddresses() {
+    public IEnumerable<Address> GetAddresses() {
         return _context.Addresses.ToList();
     }
 
