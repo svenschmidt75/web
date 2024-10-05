@@ -16,9 +16,10 @@ public class AddressController : ControllerBase {
     }
 
     [HttpGet]
-    public IEnumerable<AddressDTO> GetAddresses() {
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public ActionResult<IEnumerable<AddressDTO>> GetAddresses() {
         var addresses = _context.Addresses.ToList();
-        return _mapper.Map<IEnumerable<AddressDTO>>(addresses);
+        return Ok(_mapper.Map<IEnumerable<AddressDTO>>(addresses));
     }
 
 }
