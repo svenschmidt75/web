@@ -3,8 +3,7 @@ using WebAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<TeacherDbContext>(option =>
-{
+builder.Services.AddDbContext<TeacherDbContext>(option => {
     var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
     option.UseMySQL(connectionString);
 });
