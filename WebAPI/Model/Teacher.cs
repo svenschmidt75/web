@@ -15,5 +15,5 @@ public class Teacher {
     public DateOnly Birthday { get; set; }
 
     // SS: FK
-    public int AddressId { get; set; }
+    public Address Address { get; set; }
 }

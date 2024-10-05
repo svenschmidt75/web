@@ -11,5 +11,5 @@ public class University {
     public string Name { get; set; }
 
     // SS: FK
-    public int AdressId { get; set; }
+    public Address Adress { get; set; }
 }

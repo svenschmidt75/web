@@ -14,6 +14,6 @@ public class Student {
 
     public DateOnly Birthday { get; set; }
 
-    // SS: FK
-    public int AddressId { get; set; }
+    // SS: FK, one-to-many
+    public Address Address { get; set; }
 }

@@ -96,6 +96,8 @@ namespace WebAPI.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AddressId");
+
                     b.ToTable("Students");
                 });
 
@@ -120,6 +122,12 @@ namespace WebAPI.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.HasIndex("UniversityId");
+
                     b.ToTable("Subjects");
                 });
 
@@ -130,6 +138,10 @@ namespace WebAPI.Migrations
 
                     b.Property<int>("SubjectId")
                         .HasColumnType("int");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("SubjectId");
 
                     b.ToTable("Enrolments");
                 });
@@ -156,6 +168,8 @@ namespace WebAPI.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AddressId");
+
                     b.ToTable("Teacher");
                 });
 
@@ -174,7 +188,88 @@ namespace WebAPI.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AdressId");
+
                     b.ToTable("Universities");
+                });
+
+            modelBuilder.Entity("WebAPI.Model.Student", b =>
+                {
+                    b.HasOne("WebAPI.Model.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Address");
+                });
+
+            modelBuilder.Entity("WebAPI.Model.Subject", b =>
+                {
+                    b.HasOne("WebAPI.Model.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebAPI.Model.Teacher", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebAPI.Model.University", "University")
+                        .WithMany()
+                        .HasForeignKey("UniversityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Teacher");
+
+                    b.Navigation("University");
+                });
+
+            modelBuilder.Entity("WebAPI.Model.SubjectEnrolment", b =>
+                {
+                    b.HasOne("WebAPI.Model.Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebAPI.Model.Subject", "Subject")
+                        .WithMany()
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Student");
+
+                    b.Navigation("Subject");
+                });
+
+            modelBuilder.Entity("WebAPI.Model.Teacher", b =>
+                {
+                    b.HasOne("WebAPI.Model.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Address");
+                });
+
+            modelBuilder.Entity("WebAPI.Model.University", b =>
+                {
+                    b.HasOne("WebAPI.Model.Address", "Adress")
+                        .WithMany()
+                        .HasForeignKey("AdressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Adress");
                 });
 #pragma warning restore 612, 618
         }

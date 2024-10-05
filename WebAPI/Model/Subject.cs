@@ -8,14 +8,14 @@ public class Subject {
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
+    // SS: FK - One-To-Many
+    public Category Category { get; set; }
+
     public string Name { get; set; }
 
-    // SS: FK
-    public int CategoryId { get; set; }
+    // SS: FK - One-To-Many
+    public Teacher Teacher { get; set; }
 
-    // SS: FK
-    public int TeacherId { get; set; }
-
-    // SS: FK
-    public int UniversityId { get; set; }
+    // SS: FK - One-To-Many
+    public University University { get; set; }
 }
