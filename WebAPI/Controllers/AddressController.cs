@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using WebAPI.Model;
 
 namespace WebAPI.Controllers;
 
@@ -10,5 +11,10 @@ public class AddressController : ControllerBase {
     public AddressController(TeacherDbContext context) {
         _context = context;
     }
-    
+
+    [HttpGet]
+    public IEnumerable<Address> GetAddresses() {
+        return _context.Addresses.ToList();
+    }
+
 }
