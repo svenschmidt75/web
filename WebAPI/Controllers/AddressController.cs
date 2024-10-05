@@ -3,7 +3,7 @@ using WebAPI.Model;
 
 namespace WebAPI.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/Address")]
 [ApiController]
 public class AddressController : ControllerBase {
     private readonly TeacherDbContext _context;
@@ -13,7 +13,7 @@ public class AddressController : ControllerBase {
     }
 
     [HttpGet]
-    public IEnumerable<Address> GetAddresses() {
+    public IEnumerable<AddressDTO> GetAddresses() {
         return _context.Addresses.ToList();
     }
 
