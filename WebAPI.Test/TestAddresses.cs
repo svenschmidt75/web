@@ -2,6 +2,8 @@
 
 namespace WebAPI.Test;
 
+// https://www.code4it.dev/blog/advanced-integration-tests-webapplicationfactory/
+// https://code-maze.com/aspnet-core-integration-testing/
 public class TestAddresses : IDisposable {
     private TestingWebAppFactory _factory;
     private HttpClient _client;
@@ -26,7 +28,7 @@ public class TestAddresses : IDisposable {
         // Arrange
 
         // Act
-        var response = await _client.GetAsync("/Address");
+        var response = await _client.GetAsync("http://localhost:5032/api/Address");
         response.EnsureSuccessStatusCode();
 
         // Assert
