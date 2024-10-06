@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using Newtonsoft.Json;
+using NUnit.Framework;
+using WebAPI.Model;
 
 namespace WebAPI.Test;
 
@@ -30,8 +32,10 @@ public class TestAddresses : IDisposable {
         // Act
         var response = await _client.GetAsync("http://localhost:5032/api/Address");
         response.EnsureSuccessStatusCode();
+        var responseString = await response.Content.ReadAsStringAsync();
 
         // Assert
-        var responseString = await response.Content.ReadAsStringAsync();
+        List<AddressDTO>? address = JsonConvert.DeserializeObject<List<AddressDTO>>(responseString);
+        Assert.That(responseString, Is.Not.Null);
     }
 }
