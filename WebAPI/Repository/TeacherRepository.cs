@@ -1,26 +1,33 @@
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using WebAPI.Model;
 
 namespace WebAPI.Repository;
 
-public class TeacherRepository : ITeacherRepository {
-    private readonly TeacherDbContext _dbContext;
-
-    public TeacherRepository(TeacherDbContext dbContext) {
-        _dbContext = dbContext;
-    }
+public class TeacherRepository(TeacherDbContext dbContext) : ITeacherRepository {
 
     public async Task<List<Address>> GetAddresses() {
-        var addresses = await _dbContext.Addresses.ToListAsync();
+        var addresses = await dbContext.Addresses.ToListAsync();
         return addresses;
     }
 
+    public async Task<Address?> GetAddress(Expression<Func<Address, bool>>? filter) {
+        IQueryable<Address> query = dbContext.Addresses;
+
+        if (filter != null) {
+            query = query.Where(filter);
+        }
+
+        var addresses = await query.ToListAsync();
+        return addresses.FirstOrDefault();
+    }
+
     public async Task SaveChanges() {
-        await _dbContext.SaveChangesAsync();
+        await dbContext.SaveChangesAsync();
     }
 
     public async Task AddAddress(Address address) {
-        await _dbContext.Addresses.AddAsync(address);
-        await _dbContext.SaveChangesAsync();
+        await dbContext.Addresses.AddAsync(address);
+        await dbContext.SaveChangesAsync();
     }
 }

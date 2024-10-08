@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,10 +16,12 @@ public class TestingWebAppFactory : WebApplicationFactory<Program> {
 
             // SS: use sqlite in-memory context
             services.AddDbContext<TeacherDbContext>(option => {
+                // SS: setup in-memory database that is shared between connections
                 option.UseSqlite("DataSource=file::memory:?cache=shared")
                     .EnableSensitiveDataLogging();
             });
 
+            // SS: create in-memory database
             var sp = services.BuildServiceProvider();
             using (var scope = sp.CreateScope())
             using (var appContext = scope.ServiceProvider.GetRequiredService<TeacherDbContext>()) {
@@ -28,7 +29,6 @@ public class TestingWebAppFactory : WebApplicationFactory<Program> {
                     appContext.Database.EnsureCreated();
                 }
                 catch (Exception ex) {
-                    //Log errors or do anything you think it's needed
                     throw;
                 }
             }

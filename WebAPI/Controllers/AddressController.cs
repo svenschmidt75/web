@@ -28,6 +28,11 @@ public class AddressController : ControllerBase {
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult<AddressDTO>> CreateAddress([FromBody] AddressDTO? addressDto) {
+        if (!ModelState.IsValid) {
+            // SS: return ModelState so the validation message is shown
+            return BadRequest(ModelState);
+        }
+
         if (addressDto is null) {
             return BadRequest(addressDto);
         }
@@ -39,10 +44,24 @@ public class AddressController : ControllerBase {
 
         var address = _mapper.Map<Address>(addressDto);
         await _repository.AddAddress(address);
-        _repository.SaveChanges();
+        await _repository.SaveChanges();
 
         // SS: note that the address object is updated with the database's primary key,
         // NOT the dto object!
         return Ok(address);
     }
+
+    [HttpGet("{id}", Name = "GetAddressById")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<AddressDTO?>> GetAddress(int id) {
+        var address = await _repository.GetAddress(address => address.Id == id);
+        if (address == null) {
+            return NotFound();
+        }
+
+        var addressDto = _mapper.Map<AddressDTO>(address);
+        return Ok(addressDto);
+    }
+
 }

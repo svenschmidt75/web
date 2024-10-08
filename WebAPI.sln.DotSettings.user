@@ -14,6 +14,8 @@
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f46828c5_002D8573_002D4aea_002Daf91_002Ddeeda3f2a148/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Test1 #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
-    &lt;TestId&gt;NUnit3x::49A059F8-7F0B-46C1-8215-40EF7C65448D::net8.0::WebAPI.Test.TestAddresses.Test1&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::49A059F8-7F0B-46C1-8215-40EF7C65448D::net8.0::WebAPI.Test.TestAddresses.TestGetAddresses&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::49A059F8-7F0B-46C1-8215-40EF7C65448D::net8.0::WebAPI.Test.TestAddresses.AddAddress&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::49A059F8-7F0B-46C1-8215-40EF7C65448D::net8.0::WebAPI.Test.TestAddresses.CreateAddress&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
