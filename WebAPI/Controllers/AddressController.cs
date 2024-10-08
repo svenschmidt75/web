@@ -64,4 +64,30 @@ public class AddressController : ControllerBase {
         return Ok(addressDto);
     }
 
+    [HttpPut("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> UpdateAddress(int id, [FromBody] AddressDTO? addressDto) {
+        if (!ModelState.IsValid) {
+            // SS: return ModelState so the validation message is shown
+            return BadRequest(ModelState);
+        }
+
+        if (addressDto == null || id != addressDto.Id) {
+            return BadRequest(addressDto);
+        }
+
+        var address = await _repository.GetAddress(address => address.Id == id);
+        if (address == null) {
+            return NotFound();
+        }
+
+        // SS: update entire Address object
+        _mapper.Map(addressDto, address);
+        await _repository.SaveChanges();
+
+        return Ok(addressDto);
+    }
+
 }
