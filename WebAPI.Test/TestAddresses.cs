@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using WebAPI.Model;
 
 namespace WebAPI.Test;
@@ -52,6 +53,37 @@ public class TestAddresses {
         var responseString = await response.Content.ReadAsStringAsync();
         List<AddressDTO>? addresses = JsonConvert.DeserializeObject<List<AddressDTO>>(responseString);
         Assert.That(addresses?.Count, Is.EqualTo(1));
+    }
+
+    [Test]
+    public async Task GetAddress() {
+        // Arrange
+        AddressDTO address = new AddressDTO {
+            City = "City",
+            StreetName = "Street Name",
+            UnitNumber = 12,
+            Code = "OX14 1DX",
+            Country = "UK",
+            StreetNumber = 13,
+            State = "Oxfordshire",
+            Suburb = "Oxfordshire",
+        };
+        var requestMessage = new HttpRequestMessage(HttpMethod.Post, "http://localhost:5032/api/Address");
+        requestMessage.Content =
+            new StringContent(JsonConvert.SerializeObject(address), Encoding.UTF8, "application/json");
+        var response = await _client.SendAsync(requestMessage);
+        response.EnsureSuccessStatusCode();
+        var responseString = await response.Content.ReadAsStringAsync();
+        address = JsonConvert.DeserializeObject<AddressDTO>(responseString)!;
+
+        // Act
+        response = await _client.GetAsync($"http://localhost:5032/api/Address/{address.Id}");
+        response.EnsureSuccessStatusCode();
+
+        // Assert
+        responseString = await response.Content.ReadAsStringAsync();
+        AddressDTO address2 = JsonConvert.DeserializeObject<AddressDTO>(responseString);
+        Assert.That(address2, Is.EqualTo(address));
     }
 
     [Test]
