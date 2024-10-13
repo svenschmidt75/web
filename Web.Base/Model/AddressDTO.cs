@@ -1,7 +1,23 @@
-namespace WebAPI.Model;
+namespace Web.Base.Model;
 
 public class AddressDTO {
     public int Id { get; set; }
+
+    public int? UnitNumber { get; set; }
+
+    public int StreetNumber { get; set; }
+
+    public string StreetName { get; set; }
+
+    public string? Suburb { get; set; }
+
+    public string City { get; set; }
+
+    public string State { get; set; }
+
+    public string Code { get; set; }
+
+    public string Country { get; set; }
 
     protected bool Equals(AddressDTO other) {
         return Id == other.Id && UnitNumber == other.UnitNumber && StreetNumber == other.StreetNumber &&
@@ -29,20 +45,4 @@ public class AddressDTO {
         hashCode.Add(Country);
         return hashCode.ToHashCode();
     }
-
-    public int? UnitNumber { get; set; }
-
-    public int StreetNumber { get; set; }
-
-    public string StreetName { get; set; }
-
-    public string? Suburb { get; set; }
-
-    public string City { get; set; }
-
-    public string State { get; set; }
-
-    public string Code { get; set; }
-
-    public string Country { get; set; }
 }

@@ -1,4 +1,4 @@
-namespace WebAPI.Model;
+namespace Web.Base.Model;
 
 // SS: joining table for many-to-many relationsship
 public class SubjectEnrolment {

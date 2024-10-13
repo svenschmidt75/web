@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
-using WebAPI.Model;
+using Web.Base.Model;
 
 namespace WebAPI.Test;
 
@@ -82,7 +82,7 @@ public class TestAddresses {
 
         // Assert
         responseString = await response.Content.ReadAsStringAsync();
-        AddressDTO address2 = JsonConvert.DeserializeObject<AddressDTO>(responseString);
+        AddressDTO address2 = JsonConvert.DeserializeObject<AddressDTO>(responseString)!;
         Assert.That(address2, Is.EqualTo(address));
     }
 
@@ -120,7 +120,7 @@ public class TestAddresses {
         var response = await _client.SendAsync(requestMessage);
         response.EnsureSuccessStatusCode();
         var responseString = await response.Content.ReadAsStringAsync();
-        AddressDTO addressDto = JsonConvert.DeserializeObject<List<AddressDTO>>(responseString).First();
+        AddressDTO addressDto = JsonConvert.DeserializeObject<List<AddressDTO>>(responseString)!.First();
 
         // Act
         addressDto.City = "This is a test city";

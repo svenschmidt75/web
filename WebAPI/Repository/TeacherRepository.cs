@@ -1,6 +1,6 @@
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using WebAPI.Model;
+using Web.Base.Model;
 
 namespace WebAPI.Repository;
 

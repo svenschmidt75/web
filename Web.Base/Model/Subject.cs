@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace WebAPI.Model;
+namespace Web.Base.Model;
 
 public class Subject {
     [Key]

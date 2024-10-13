@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace WebAPI.Model;
+namespace Web.Base.Model;
 
-public class Student {
+public class Teacher {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
@@ -14,6 +14,6 @@ public class Student {
 
     public DateOnly Birthday { get; set; }
 
-    // SS: FK, one-to-many
+    // SS: FK
     public Address Address { get; set; }
 }

@@ -1,6 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using WebAPI.Model;
+using Web.Base.Model;
 using WebAPI.Repository;
 
 namespace WebAPI.Controllers;

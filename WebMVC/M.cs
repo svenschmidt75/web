@@ -1,7 +1,7 @@
 using AutoMapper;
 using Web.Base.Model;
 
-namespace WebAPI;
+namespace WebMVC;
 
 public class MappingConfig : Profile {
     public MappingConfig() {
